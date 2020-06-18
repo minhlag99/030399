@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace Bigschool.Controllers
 {
@@ -25,8 +29,8 @@ namespace Bigschool.Controllers
                 Categories = _dbContext.Categories.ToList()
             };
             return View(viewModel);
-        }
-        [Authorize]
+        }  
+        [Authorize]  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModel)
@@ -45,7 +49,7 @@ namespace Bigschool.Controllers
             };
             _dbContext.Courses.Add(course);
             _dbContext.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index","Home");
         }
     }
 }
